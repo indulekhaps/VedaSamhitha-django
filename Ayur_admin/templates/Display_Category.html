@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Display Category</h1>
+<table>
+    <tr>
+        <th>CategoryName</th>
+        <th>Description</th>
+        <th>CategoryImage</th>
+        <th>Options</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{i.CategoryName}}</td>
+        <td>{{i.Description}}</td>
+        <td>{{i.CategoryImage}}</td>
+        <td>
+            <a href="{% url 'edit_category' category_id=i.id %}">
+                <button>Edit</button>
+            </a>
+            <a href="{% url 'delete_category' category_id=i.id %}">
+                <button>Delete</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
