@@ -5,56 +5,217 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Category | Vedasamhitha Admin</title>
 
-    <!-- Example using Bootstrap (You can switch to Tailwind if needed) -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: url('/static/Dashboard/assets/images/Myimages/make2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            color: #4a5568;
+        }
+
+        .container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95));
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            border: none;
+            backdrop-filter: blur(10px);
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(104, 211, 145, 0.05), rgba(72, 187, 120, 0.05));
+            border-radius: 25px;
+            pointer-events: none;
+        }
+
+        .page-title {
+            font-weight: 600;
+            color: #68d391;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            border-radius: 20px;
+            border: none;
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .card-header {
+            border-radius: 20px 20px 0 0;
+            background: linear-gradient(135deg, rgba(104, 211, 145, 0.8), rgba(72, 187, 120, 0.8));
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid rgba(104, 211, 145, 0.5);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .form-control:focus {
+            border-color: #68d391;
+            box-shadow: 0 0 0 0.2rem rgba(104, 211, 145, 0.25);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .required::after {
+            content: " *";
+            color: #e53e3e;
+        }
+
+        .btn-success {
+            padding: 12px 35px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #68d391, #48bb78);
+            border: none;
+            box-shadow: 0 4px 15px rgba(104, 211, 145, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(104, 211, 145, 0.6);
+        }
+
+        .btn-secondary {
+            padding: 12px 35px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #a0aec0, #718096);
+            border: none;
+            box-shadow: 0 4px 15px rgba(160, 174, 192, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(160, 174, 192, 0.6);
+        }
+
+        .hint-box {
+            background: rgba(237, 242, 247, 0.8);
+            border-left: 4px solid #68d391;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label {
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        .text-muted {
+            color: #718096 !important;
+        }
+    </style>
 </head>
 
-<body class="bg-light">
+<body>
 
-    <div class="container mt-5">
-        <div class="card shadow-sm">
-            <div class="card-header bg-success text-white">
-                <h4 class="mb-0">Add New Category</h4>
-            </div>
+<div class="container mt-5 mb-5">
 
-            <div class="card-body">
+    <!-- PAGE HEADING -->
+    <div class="mb-4">
+        <h3 class="page-title">
+            <i class="bi bi-folder-plus"></i> Add New Category
+        </h3>
+        <p class="text-muted mb-0">Manage product categories for Vedasamhitha Ayurvedic Store</p>
+    </div>
 
-                <form action="{% url 'save_add_category' %}" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
+    <div class="card shadow-sm">
 
-                    <!-- CATEGORY NAME -->
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Category Name</label>
-                        <input type="text" name="name" class="form-control"
-                               placeholder="Eg: Ayurvedic Oils, Haircare, Eye Care" required>
+        <!-- CARD HEADER -->
+        <div class="card-header bg-success text-white py-3">
+            <h5 class="mb-0">
+                <i class="bi bi-plus-circle"></i> Category Information
+            </h5>
+        </div>
+
+        <!-- CARD BODY -->
+        <div class="card-body p-3">
+
+            <form action="{% url 'save_add_category' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row">
+                    <!-- LEFT COLUMN -->
+                    <div class="col-md-6">
+                        <!-- CATEGORY NAME -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold required">
+                                Category Name
+                            </label>
+                            <input type="text" name="name" class="form-control form-control-lg" required>
+                        </div>
+
+                        <!-- DESCRIPTION -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                Description
+                            </label>
+                            <textarea name="description" class="form-control" rows="4"></textarea>
+                        </div>
                     </div>
 
-                    <!-- DESCRIPTION -->
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Description</label>
-                        <textarea name="description" class="form-control" rows="3"
-                                  placeholder="Short description about this category..."></textarea>
+                    <!-- RIGHT COLUMN -->
+                    <div class="col-md-6">
+                        <!-- IMAGE UPLOAD -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                Category Image
+                            </label>
+                            <input type="file" name="image" class="form-control" accept="image/*">
+                            <small class="text-muted">
+                                Recommended size: 500×500px | JPG / PNG
+                            </small>
+                        </div>
+
+                        <!-- INFO / HINT -->
+                        <div class="hint-box mb-4">
+                            <i class="bi bi-info-circle-fill"></i>
+                            Categories help users easily find medicines based on care type such as oils, eye care, hair care, etc.
+                        </div>
                     </div>
+                </div>
 
-                    <!-- IMAGE UPLOAD -->
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Category Image</label>
-                        <input type="file" name="image" class="form-control" accept="image/*">
-                        <small class="text-muted">Upload a square image for best results.</small>
-                    </div>
+                <!-- ACTION BUTTONS -->
+                <div class="d-flex gap-3 justify-content-center">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-check-circle"></i> Save Category
+                    </button>
 
-                    <!-- SUBMIT BUTTON -->
-                    <div class="mt-4">
-                        <button type="submit" class="btn btn-success px-4">Add Category</button>
-                        <a href="/admin/category-list" class="btn btn-secondary px-4">Cancel</a>
-                    </div>
+                    <a href="/admin/category-list" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Cancel
+                    </a>
+                </div>
 
-                </form>
+            </form>
 
-            </div>
         </div>
     </div>
+</div>
 
 </body>
 </html>
